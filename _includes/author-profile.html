@@ -16,9 +16,32 @@
       <a class="u-url" rel="me" href="{{ author.home | default: '/' | absolute_url }}" itemprop="url">{{ author.name }}</a>
     </h3>
     {% if author.bio %}
-      <div class="author__bio p-note" itemprop="description">
-        {{ author.bio | markdownify }}
+    <div class="author__bio p-note" itemprop="description">
+      {{ author.bio | markdownify }}
+
+      <div id="visitor-counter" style="text-align:center; margin:20px;">
+        <h3>방문자 수</h3>
+        <p id="count">0</p>
       </div>
+
+      <script>
+        // 방문자 수 카운팅 with localStorage
+        function updateCount() {
+          let count = parseInt(localStorage.getItem('visitorCount')) || 0;
+          count++;
+          localStorage.setItem('visitorCount', count);
+          document.getElementById("count").innerText = count;
+        }
+
+        window.onload = updateCount; // 페이지 로드 시 카운트 증가
+      </script>
+
+      <!-- 알림 메시지 -->
+      <div id="alert-message" style="background-color:#f9c2c2; padding:10px; text-align:center; margin:20px;">
+        <strong>안녕하세요!</strong> 블로그에 오신 것을 환영합니다!
+      </div>
+
+    </div>
     {% endif %}
   </div>
 
